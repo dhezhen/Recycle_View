@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements KontakAdapter.OnContactClickListener{
-
 
     public RecyclerView rv;
     public KontakAdapter contactAdapter;
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements KontakAdapter.OnC
         Kontak kontak = listContact.get(position);
         Toast.makeText(this, kontak.getNama(), Toast.LENGTH_LONG)
                 .show();
+
+        String phone = kontak.getTelepon();
+        Intent callIntent = new Intent(Intent.ACTION_DIAL);
+        callIntent.setData(Uri.parse("tel:" + phone));
+        startActivity(callIntent);
 
     }
 
